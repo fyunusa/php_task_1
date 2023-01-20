@@ -128,7 +128,7 @@ $isbn           = (isset($_GET['isbn']) ? $_GET['isbn'] : '');
 $year           = (isset($_GET['year']) ? $_GET['year'] : '');
 
 
-$filters = "school_id=" . $school_id . "&class_id=" . $class_id . "&professor_id=" . $professor_id . "&isbn=" . $isbn . "year=" . $year . "&";
+$filters = "school_id=" . $school_id . "&class_id=" . $class_id . "&professor_id=" . $professor_id . "&isbn=" . $isbn . "&year=" . $year . "&";
 
 ?>
 <div class="container-fluid jumbotron" style="min-height:99px;padding: 2rem 1rem;">
@@ -192,25 +192,25 @@ $filters = "school_id=" . $school_id . "&class_id=" . $class_id . "&professor_id
                         </select>
 
                     </div>
-
-                    <!-- -----------Begin Year Filter------- -->
                     <div class="col-md-2 col-sm-12">
 
-                        <select name="class_id" class="custom-select trigger_change_event get_year_select2 ">
+                        <select name="year" class="custom-select trigger_change_event get_years_select2 ">
                             <option value="0">Select Year</option>
-                            <?php if (isset($this->_data['year_data'])) {
-                                foreach ($this->_data['year_data']  as $key => $value) {
+                            <?php if (isset($this->_data['year'])) {
+                                foreach ($this->_data['year']  as $key => $value) {
                             ?>
-                                    <option <?php echo ($_GET['year_id'] ?? 0) == $value->id ? 'selected' : ''; ?> value="<?php echo $value->id; ?>"><?php echo $value->name; ?></option>
-                            <?php }
+                                    <option <?php echo ($_GET['year'] ?? '') == $value['year'] ? 'selected' : ''; ?> value="<?php echo $value['year']; ?>"><?php echo $value['year']; ?></option>
+                            <?php
+                                }
                             } ?>
                         </select>
 
                     </div>
-                    <!-- -----------End Year Filter------- -->
-                    <div class="col-md-2 col-sm-2">
-                        <a href=" <?php echo base_url(); ?>buy" id="reset">Reset Filters</a>
-                    </div>
+                </div>
+                <div class="row mt-2">
+                    <!-- <div class="col-md-2 col-sm-2"> -->
+                    <a href=" <?php echo base_url(); ?>buy" id="reset">Reset Filters</a>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -235,7 +235,6 @@ $filters = "school_id=" . $school_id . "&class_id=" . $class_id . "&professor_id
                             <th>Rating <a style="color: white;" href="?<?php echo $filters ?>order_by=review&direction=<?php echo (($_GET['order_by'] ?? '') == 'review') ?  ($_GET['direction'] == 'DESC' ? 'ASC' : 'DESC') : 'ASC'; ?>"><i class="fa fa-sort<?php echo (($_GET['order_by'] ?? '') == 'review') ?  ($_GET['direction'] == 'DESC' ? '-down' : '-up') : ''; ?>"></i></a></th>
 
                             <th>Preview / Download</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -448,10 +447,10 @@ $filters = "school_id=" . $school_id . "&class_id=" . $class_id . "&professor_id
 
 
                     <div class="checkbox">
-                        <label><input type="checkbox" name="remember" id="remember"> I agree to Terms and Conditions <a href="#"><u>here</u></a></label>
+                        <label><input type="checkbox" name="remember" id="remember"> I agree to Terms and Conditions <a href="https://termly.io/our-terms-of-use/"><u>here</u></a></label>
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" name="remember2" id="remember2"> I agree to Privacy Policy <a href="#"><u>here</u></a></label>
+                        <label><input type="checkbox" name="remember2" id="remember2"> I agree to Privacy Policy <a href="https://termly.io/our-privacy-policy/"><u>here</u></a></label>
                     </div>
                     <div>
                         <img src="<?php echo base_url(); ?>assets/frontend/img/download.png" style="margin-left:88px; height: 97px;width: 254px;" />
